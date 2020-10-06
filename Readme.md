@@ -22,7 +22,7 @@
 * Easy access to various software such as Astra-toolbox, TomoPy, TIGRE, ToMoBAR and others
 * Quick access to more than a hundred of various plugins for data processing, reconstruction and analysis
 
-===============================================================================================================
+==================================================================
 ## Different ways to install Savu-lite on a Unix-based workstation:
 
 ### Installation of a pre-built Savu-lite package into a _clean_ [conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) environment
