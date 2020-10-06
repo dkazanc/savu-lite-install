@@ -1,0 +1,272 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Development &#8212; savu-lite 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Diamond Light Source Specific Notes" href="diamond.html" />
+    <link rel="prev" title="Testing" href="testing.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="diamond.html" title="Diamond Light Source Specific Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">savu-lite 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<p>Development notes for savu-lite</p>
+<div class="section" id="cooking-with-conda">
+<h2>Cooking with Conda<a class="headerlink" href="#cooking-with-conda" title="Permalink to this headline">¶</a></h2>
+<p>To set-up the basic development environment download Miniconda2-latest-linux-x86_64.sh and install on local machine.  Update to get latest versions and then install conda-build,  conda-verify, sphinx (for documentation), and anaconda-client (to allow uploading to anaconda cloud).</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">conda</span></code></li>
+<li><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">conda-build</span></code></li>
+<li><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">conda-verify</span></code></li>
+<li><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">sphinx</span></code></li>
+<li><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">anaconda-client</span></code></li>
+</ol>
+</div>
+<div class="section" id="building-savu-lite">
+<h2>Building savu-lite<a class="headerlink" href="#building-savu-lite" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-sequence">
+<h3>Build Sequence<a class="headerlink" href="#build-sequence" title="Permalink to this headline">¶</a></h3>
+<p>Move to python 2 environment “miniconda2”</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">miniconda2</span></code></div></blockquote>
+<p>From directory containing meta.yaml and build.sh {the only required files}</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda-build</span> <span class="pre">purge</span></code>
+<code class="docutils literal"><span class="pre">conda-build</span> <span class="pre">.</span></code></div></blockquote>
+<p>Upload resulting file that will be created in linux-64 folder {first time it will create anaconda-project.yml}</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">anaconda</span> <span class="pre">upload</span> <span class="pre">linux-64/savu.....</span></code></div></blockquote>
+<p>Test by downloading file from test channel into fresh test environment</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">test_channel</span> <span class="pre">savu-lite</span></code></div></blockquote>
+<p>Run training example and savu_full_test</p>
+<p>Upload to savu-dep if testing passes</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">anaconda</span> <span class="pre">upload</span> <span class="pre">-u</span> <span class="pre">savu-dep</span> <span class="pre">linux-64/savu.....</span></code></div></blockquote>
+</div>
+<div class="section" id="channels">
+<h3>Channels<a class="headerlink" href="#channels" title="Permalink to this headline">¶</a></h3>
+<p><strong>Default channels used</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="https://repo.anaconda.com/pkgs/main/linux-64">https://repo.anaconda.com/pkgs/main/linux-64</a></li>
+<li><a class="reference external" href="https://repo.anaconda.com/pkgs/main/noarch">https://repo.anaconda.com/pkgs/main/noarch</a></li>
+<li><a class="reference external" href="https://repo.anaconda.com/pkgs/r/linux-64">https://repo.anaconda.com/pkgs/r/linux-64</a></li>
+<li><a class="reference external" href="https://repo.anaconda.com/pkgs/r/noarch">https://repo.anaconda.com/pkgs/r/noarch</a></li>
+<li><a class="reference external" href="https://conda.anaconda.org/conda-forge/linux-64">https://conda.anaconda.org/conda-forge/linux-64</a></li>
+<li><a class="reference external" href="https://conda.anaconda.org/conda-forge/noarch">https://conda.anaconda.org/conda-forge/noarch</a></li>
+</ul>
+<p><strong>Additional channels used</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="https://conda.anaconda.org/astra-toolbox/label/dev/linux-64">https://conda.anaconda.org/astra-toolbox/label/dev/linux-64</a></li>
+<li><a class="reference external" href="https://conda.anaconda.org/astra-toolbox/label/dev/noarch">https://conda.anaconda.org/astra-toolbox/label/dev/noarch</a></li>
+<li><a class="reference external" href="https://conda.anaconda.org/ccpi/linux-64">https://conda.anaconda.org/ccpi/linux-64</a></li>
+<li><a class="reference external" href="https://conda.anaconda.org/ccpi/noarch">https://conda.anaconda.org/ccpi/noarch</a></li>
+<li><a class="reference external" href="https://conda.anaconda.org/dkazanc/linux-64">https://conda.anaconda.org/dkazanc/linux-64</a></li>
+<li><a class="reference external" href="https://conda.anaconda.org/dkazanc/noarch">https://conda.anaconda.org/dkazanc/noarch</a></li>
+</ul>
+<p><strong>Channel Priority</strong></p>
+<p>Channel_Priority is one of strict, flexible, disabled.  Strict chosen as it should be quickest as it takes stops when it finds a package looking in defined order.</p>
+<p><em>.condarc includes</em></p>
+<ul class="simple">
+<li>channels:<ul>
+<li>defaults</li>
+<li>conda-forge</li>
+<li>astra-toolbox/label/dev</li>
+<li>ccpi</li>
+<li>dkazanc</li>
+</ul>
+</li>
+<li>auto_activate_base: false</li>
+<li>show_channel_urls: true</li>
+<li>unsatisfiable_hints: true</li>
+</ul>
+<p><strong>Local Channels Creation</strong></p>
+<p>Created a Conda Environment and install conda-build</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">local_channel_name</span> <span class="pre">python=2</span> <span class="pre">conda-build</span></code></p>
+<p><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">conda-build</span></code></p>
+</div></blockquote>
+<p>To create a local channel for python package “click”:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">conda</span> <span class="pre">skeleton</span> <span class="pre">pypi</span> <span class="pre">click</span></code></p>
+<p><code class="docutils literal"><span class="pre">conda-build</span> <span class="pre">click</span></code></p>
+</div></blockquote>
+<p><em>whenever local channels change</em>
+run the following in the channel root directory:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">index</span></code></div></blockquote>
+<p>Able to pick-up local version of click using:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">local_channel_name</span> <span class="pre">click</span></code></div></blockquote>
+</div>
+<div class="section" id="use-of-pip-with-conda">
+<h3>Use of PIP with conda<a class="headerlink" href="#use-of-pip-with-conda" title="Permalink to this headline">¶</a></h3>
+<p>pip installs are not recommended as they mix poorly Conda and should be done after conda installs completed!?</p>
+<p>Currently the following files need to be pip installed as part of the build.sh script:</p>
+<ul class="simple">
+<li>gnureadline (8.0.0) - deprecated and no longer recommended for use</li>
+<li>nvidia-ml-py (7.352.0) - older python 2 version</li>
+</ul>
+<p>However Conda and Pip don’t play well together and this is only an interim solution.</p>
+<p><strong>Gnureadline</strong></p>
+<p>This is reasonably low-risk given the lack of dependencies. The long-term solution is likely to be removal of dependency in Savu.
+Conda install options listed at: <a class="reference external" href="https://anaconda.org/conda-forge/gnureadline">https://anaconda.org/conda-forge/gnureadline</a> do not work.</p>
+<p><strong>Nvidia-ml-py</strong></p>
+<p><a class="reference external" href="https://files.pythonhosted.org/packages/72/31/378ca145e919ca415641a0f17f2669fa98c482a81f1f8fdfb72b1f9dbb37/nvidia-ml-py-7.352.0.tar.gz">https://files.pythonhosted.org/packages/72/31/378ca145e919ca415641a0f17f2669fa98c482a81f1f8fdfb72b1f9dbb37/nvidia-ml-py-7.352.0.tar.gz</a></p>
+</div>
+<div class="section" id="anaconda-cloud">
+<h3>Anaconda Cloud<a class="headerlink" href="#anaconda-cloud" title="Permalink to this headline">¶</a></h3>
+<p>Anaconda Cloud is best delivery mechanism for savu-lite.  Adding the built package to existing savu-dep anaconda cloud repository automatically allows conda install with savu-dep as the channel.  This seems much easier that attempting to set-up a continuous integration build on conda-forge that would not be of much use for this application.  It also quick, less than 15 minutes to upload and requires no approval from any external entity.</p>
+<p><strong>To access Anaconda Cloud</strong></p>
+<p>Sign-up at: <a class="reference external" href="https://anaconda.org/">https://anaconda.org/</a>
+Add to conda installation anaconda-client as follows:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">anaconda-client</span></code></div></blockquote>
+<p><strong>Notes</strong>
+needed to delete and re-add to change documentation URL shown on Anaconda Cloud.</p>
+</div>
+<div class="section" id="build-with-miniconda-3-or-2">
+<h3>Build with Miniconda 3 or 2 ?<a class="headerlink" href="#build-with-miniconda-3-or-2" title="Permalink to this headline">¶</a></h3>
+<p>Miniconda2 seemed to have stability issues {some packages no longer supported?!}. Miniconda3 may cause issues when used even though building a python 2 system although this needs to be reconfirmed.</p>
+</div>
+<div class="section" id="miscellaneous">
+<h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h3>
+<p><strong>Python 2 “end of life”</strong></p>
+<blockquote>
+<div><p>Any Python 2 solution will be frozen in time as support for dependant libraries will diminish and cease.
+Currently 2.7.16 used, 2.7.17 is latest with 2.7.18 due in April</p>
+<p>numpy is no longer supported for python 2; last available version that can be used is 1.16.6</p>
+</div></blockquote>
+<p><strong>Virtual Packages</strong>
+exist for: cuda (__cuda) and glibc (__glibc)
+These can detect presence of and return version numbers for features that cannot be managed directly by conda.</p>
+<p><strong>yaml</strong>
+need pyyaml in recipe to import yaml even though yaml is installed</p>
+<p><strong>pandoc</strong></p>
+<p>A very nice tool that automatically converts between document formats, it is available via conda, and should do most and in simple cases all of the necessary work for likely source formats. As a command line tools it is automation friendly. Details can be found at <a class="reference external" href="https://pandoc.org/">pandoc</a></p>
+</div>
+</div>
+<div class="section" id="useful-links">
+<h2>Useful Links<a class="headerlink" href="#useful-links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Guide to Conda environments - <a class="reference external" href="https://towardsdatascience.com/a-guide-to-conda-environments-bc6180fc533">condaguide</a></li>
+<li>ReadtheDocs Guide - <a class="reference external" href="https://docs.readthedocs.io/en/stable/">readthedocsguide</a> (incorporates a good “Getting Started with Sphinx”)</li>
+<li>Existing ReadtheDocs Project account - <a class="reference external" href="https://readthedocs.org/projects/savu/">savudocs</a></li>
+<li>Sphinx Quick Start Guide - <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">sphinxguide</a></li>
+<li>pandoc file conversion tool - <a class="reference external" href="https://pandoc.org/">pandoc</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development</a><ul>
+<li><a class="reference internal" href="#cooking-with-conda">Cooking with Conda</a></li>
+<li><a class="reference internal" href="#building-savu-lite">Building savu-lite</a><ul>
+<li><a class="reference internal" href="#build-sequence">Build Sequence</a></li>
+<li><a class="reference internal" href="#channels">Channels</a></li>
+<li><a class="reference internal" href="#use-of-pip-with-conda">Use of PIP with conda</a></li>
+<li><a class="reference internal" href="#anaconda-cloud">Anaconda Cloud</a></li>
+<li><a class="reference internal" href="#build-with-miniconda-3-or-2">Build with Miniconda 3 or 2 ?</a></li>
+<li><a class="reference internal" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#useful-links">Useful Links</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="previous chapter">Testing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="diamond.html"
+                        title="next chapter">Diamond Light Source Specific Notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/development.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="diamond.html" title="Diamond Light Source Specific Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="testing.html" title="Testing"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">savu-lite 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Diamond Light Source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

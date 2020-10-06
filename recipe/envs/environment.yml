@@ -1,0 +1,47 @@
+name: savu3-lite
+channels:
+- conda-forge
+- defaults
+- astra-toolbox/label/dev
+- dkazanc
+# - ccpi
+dependencies:
+- python=3.7
+- numpy
+- tomobar
+- tomophantom
+- larix
+- ccpi-regulariser
+# - ccpi-reconstruction
+- astra-toolbox
+- cython
+- scipy
+- pytest
+- colorama
+- setuptools
+- jinja2
+- pandas
+- mock
+- ipython
+- matplotlib
+- PyWavelets
+- scikit-image
+- scikit-learn
+- xraylib
+- fabio
+- pyfai
+- tifffile
+- pyfftw
+- peakutils
+- pip
+- yamllint
+- hdf5
+- h5py=*=mpi_openmpi*
+- openmpi
+- mpi4py
+- linecache2
+- traceback2
+- pyyaml
+- nvidia-ml
+- pymca
+- tomopy

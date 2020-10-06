@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Testing &#8212; savu-lite 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Diamond Light Source Specific Notes" href="diamond.html" />
+    <link rel="prev" title="Development" href="development.html" /> 
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="diamond.html" title="Diamond Light Source Specific Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="development.html" title="Development"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">savu-lite 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="test-environment">
+<h2>Test Environment<a class="headerlink" href="#test-environment" title="Permalink to this headline">¶</a></h2>
+<p>To create a test environment (called “test” in command below)</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">--name</span> <span class="pre">test</span> <span class="pre">python=2</span></code></div></blockquote>
+<p>To switch to “test” environment:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">test</span></code></div></blockquote>
+<p>To reset “test” environment to initial install:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">--name</span> <span class="pre">test</span> <span class="pre">--revision</span> <span class="pre">0</span></code></div></blockquote>
+</div>
+<div class="section" id="savu-training-examples">
+<h2>Savu Training Examples<a class="headerlink" href="#savu-training-examples" title="Permalink to this headline">¶</a></h2>
+<p>Training examples are documented here: <a class="reference external" href="https://savu.readthedocs.io/en/latest/user_guides/user_training/#training-examples">trainingexamples</a></p>
+<p><strong>Simple</strong></p>
+<p>This can be run if in the TrainingExample root directory as follows:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">savu</span> <span class="pre">data/24737.nxs</span> <span class="pre">process_lists/simple_tomo_pipeline_cpu.nxs</span> <span class="pre">.</span></code></div></blockquote>
+<p>Data files have to be opened and saved by savu_config to avoid import error for a module nxtomo_loader; pending a future formal fix to Savu.</p>
+<p><strong>Parallel</strong></p>
+<p>This can be run if in the TrainingExample root directory as follows assuming a writeable “/tmp2” folder exists:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">savu_mpijob_local.sh</span> <span class="pre">data/24737.nxs</span> <span class="pre">process_lists/simple_tomo_pipeline.nxs</span> <span class="pre">.</span> <span class="pre">-d</span> <span class="pre">/tmp2</span></code></div></blockquote>
+<p>This currently fails, but is not a priority as savu-lite was not intended to run in parallel.</p>
+<p>Current Error is:</p>
+<blockquote>
+<div>Global Name ‘mpi4py’ is not defined</div></blockquote>
+</div>
+<div class="section" id="existing-savu-tests">
+<h2>Existing Savu Tests<a class="headerlink" href="#existing-savu-tests" title="Permalink to this headline">¶</a></h2>
+<p>These can be run successfully from a conda installed savu-lite.</p>
+<ul class="simple">
+<li>savu_quick_tests</li>
+<li>savu_full_test</li>
+</ul>
+<p><strong>savu_quick_tests</strong></p>
+<p>This is run as part of the build. scikit-image is a pre-requisite for it to run and has therefore been included in savu-lite build.</p>
+<p><strong>savu_full_test</strong></p>
+<p>This can be run after savu-lite has been installed, success is indicated by it completing with no errors reported at its conclusion.
+Pre-requisites for this to run are: tifffile, pyfai, peakutils, fabio, tomopy, pymca</p>
+<blockquote>
+<div><p><a class="reference external" href="https://pypi.org/project/pynvml/#description">https://pypi.org/project/pynvml/#description</a></p>
+<p><a class="reference external" href="https://github.com/vasole/pymca/blob/master/PyMca5/PyMcaPhysics/xrf/FastXRFLinearFit.py">https://github.com/vasole/pymca/blob/master/PyMca5/PyMcaPhysics/xrf/FastXRFLinearFit.py</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="savu-issues">
+<h2>Savu Issues<a class="headerlink" href="#savu-issues" title="Permalink to this headline">¶</a></h2>
+<p>Refresh.py is awaiting a fix that will be introduced in next release.</p>
+<p><strong>Training Example Errors</strong></p>
+<p>The Savu 2.4 training examples are out-of-date: <a class="reference external" href="https://savu.readthedocs.io/en/latest/user_guides/user_training/#training-examples">trainingexamples</a></p>
+<p>Refresh.py is awaiting a fix that will be introduced in next release.
+python process_lists/refresh.py</p>
+<p>In the meantime this can be resolved by opening data files with savu_config and then re-saving them. Thus avoiding import error for a module nxtomo_loader.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Testing</a><ul>
+<li><a class="reference internal" href="#test-environment">Test Environment</a></li>
+<li><a class="reference internal" href="#savu-training-examples">Savu Training Examples</a></li>
+<li><a class="reference internal" href="#existing-savu-tests">Existing Savu Tests</a></li>
+<li><a class="reference internal" href="#savu-issues">Savu Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="development.html"
+                        title="previous chapter">Development</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="diamond.html"
+                        title="next chapter">Diamond Light Source Specific Notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/testing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="diamond.html" title="Diamond Light Source Specific Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="development.html" title="Development"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">savu-lite 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Diamond Light Source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.3.
+    </div>
+  </body>
+</html>

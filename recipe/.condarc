@@ -1,0 +1,14 @@
+channels:
+  - defaults
+  - conda-forge
+  - astra-toolbox/label/dev
+  - ccpi
+  - dkazanc
+auto_activate_base: false
+envs_dirs:
+  - /scratch/Alun
+conda-build:
+  root-dir: /scratch/Alun/sa3
+show_channel_urls: true
+unsatisfiable_hints: true
+

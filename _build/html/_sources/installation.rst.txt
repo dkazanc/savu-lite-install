@@ -1,0 +1,25 @@
+======================
+savu-lite installation
+======================
+
+Install Miniconda
+-----------------
+
+Download Miniconda2-latest-linux-x86_64.sh and install on local machine
+
+Set-Up Miniconda
+----------------
+
+conda update conda
+
+Install savu-lite
+-----------------
+
+conda install -c savu-dep savu-lite
+
+Optional Additions
+------------------
+
+conda install tomopy
+
+
