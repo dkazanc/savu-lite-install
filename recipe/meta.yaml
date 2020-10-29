@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/DiamondLightSource/Savu/archive/py37_local.zip
-  sha256: 0dd60cad7bf00006ef45dcac2d42b93737ac12c8fd532a042bfce5346bc0f48b
+  sha256: 50f2bbc25bcc37ae0ba26a88d800f42b988de96d07142de4fb5170ac7ffa0ba2
 
 build:
   number: 2
@@ -15,13 +15,13 @@ build:
 
 requirements:
   host:
-    - python >3
+    - python
     - pip
     - wheel
 
   run:
     - python=3.7
-    - numpy
+    - numpy=1.15
     - astra-toolbox
     - cudatoolkit
     - scipy
@@ -32,6 +32,7 @@ requirements:
     - ccpi-reconstruction
     - ccpi-regulariser
     - larix
+    - tomophantom
     - h5py=*=mpi_openmpi*
     - openmpi
     - mpi4py
@@ -54,7 +55,7 @@ test:
     - numpy
     - scipy
     - pyfftw
-    - tomobar
+    - tomobar    
     - linecache2
     - traceback2
     - savu

@@ -32,10 +32,9 @@ conda install -c savu-dep savu-lite
 
 ### Installation of Savu-lite package using created environment file:
  - Install **Miniconda3** and activate base environment
- - Modify `PREFIX` in `recipe/envs/environment_fixed.yml` to your desired installation location
- - `conda env create -f recipe/envs/environment_fixed.yml`
- - `conda activate savu3-lite`
- - Go to the main [Savu](https://github.com/DiamondLightSource/Savu/) folder and execute `python setup.py install` and that'll install **Savu** in your environment
+ - `conda env create -f recipe/envs/environment_fixed.yml --prefix=/path/to/your/savu/environment`
+ - Activate the environment
+ - Go to cloned [Savu](https://github.com/DiamondLightSource/Savu/) folder and execute `python setup.py install` which will install **Savu** in your environment
 
 ### Installation of pre-built Savu-lite package using [conda-pack](https://conda.github.io/conda-pack/):
 - Download Savu-lite archive from [Zenodo](https://zenodo.org/communities/ccpi/?page=1&size=20)
